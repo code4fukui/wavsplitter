@@ -7,7 +7,7 @@ if (Deno.args.length == 0) {
   Deno.exit(1);
 }
 const fn = Deno.args[0];
-const silencegapsec = parseFloat(Deno.args[1] || "0.5");
+const silencegapsec = parseFloat(Deno.args[1] || "0.1");
 
 const sec2count = (wav, sec) => Math.floor(sec * wav.fmt.sampleRate);
 
@@ -81,4 +81,6 @@ if (end > start) {
   await writeWave(idx, start, end - start);
 } else if (start == 0 && end == 0) {
   await writeWave(idx, 0, wavs.length);
+} else {
+  await writeWave(idx, start, wavs.length - start);
 }
