@@ -77,7 +77,6 @@ for (let i = 0; i < wavs.length; i++) {
     }
   }
 }
-console.log(end, start);
 if (end > start) {
   await writeWave(idx, start, end - start);
 } else if (start == 0 && end == 0) {
