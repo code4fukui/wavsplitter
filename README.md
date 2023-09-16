@@ -9,3 +9,8 @@ deno run -A https://code4fukui.github.io/wavsplitter/split.js long.wav
 ```sh
 ffmpeg -i long.m4a long.wav
 ```
+
+## lib
+
+- [WaveFile-es](https://github.com/code4fukui/wavefile-es/)
+- [Num.js](https://github.com/code4fukui/Num/)
