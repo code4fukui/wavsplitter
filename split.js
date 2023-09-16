@@ -53,7 +53,7 @@ for (let i = 0; i < wavs.length; i++) {
       cnt++;
       if (cnt == nzero) {
         state = 1;
-        end = i - nzero;
+        end = i - (nzero - 1);
       }
     } else {
       cnt = 0;
@@ -61,10 +61,12 @@ for (let i = 0; i < wavs.length; i++) {
   } else {
     if (w != 0) {
       const len = end - start;
-      await writeWave(idx, start, len);
+      if (len > 0) {
+        await writeWave(idx, start, len);
+        idx++;
+      }
       cnt = 0;
       start = i;
-      idx++;
       state = 0;
     }
   }
