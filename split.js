@@ -13,7 +13,13 @@ const sec2count = (wav, sec) => Math.floor(sec * wav.fmt.sampleRate);
 
 const wav = new WaveFile();
 wav.fromBuffer(await Deno.readFile(fn));
-console.log(wav.fmt);
+if (wav.fmt.numChannels != 2) {
+  throw new Error("only spported 2 channels");
+}
+if (wav.fmt.bitsPerSample != 16) {
+  throw new Error("only spported 16 bit");
+}
+//console.log(wav.fmt);
 
 const sfn = fn.substring(0, fn.length - 4) + "_";
 
@@ -71,6 +77,9 @@ for (let i = 0; i < wavs.length; i++) {
     }
   }
 }
+console.log(end, start);
 if (end > start) {
   await writeWave(idx, start, end - start);
+} else if (start == 0 && end == 0) {
+  await writeWave(idx, 0, wavs.length);
 }
